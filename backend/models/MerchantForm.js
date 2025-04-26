@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const merchantFormSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  productName: String,
-  productType: String,
-  quantityRequired: String,
-  minExpectedPrice: String,
-  maxExpectedPrice: String,
-  productWeight: String,
-  priceRange: String,
-  address: String,
-  phone: String // <- added field
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  productName: { type: String, required: true },
+  productType: { type: String, required: true },
+  requiredQuantity: { type: Number, required: true },
+  minPrice: { type: Number, required: true },
+  maxPrice: { type: Number, required: true },
+  productWeight: { type: String, required: true },
+  address: { type: String, required: true },
 });
 
 module.exports = mongoose.model('MerchantForm', merchantFormSchema);

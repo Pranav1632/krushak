@@ -1,109 +1,98 @@
-// src/pages/MerchantForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./FormPage.css";
-
+import "./MerchantForm.css";
 
 const MerchantForm = () => {
-  const [productName, setProductName] = useState("");
-  const [productType, setProductType] = useState("");
-  const [requiredQuantity, setRequiredQuantity] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [productWeight, setProductWeight] = useState("");
-  const [priceRange, setPriceRange] = useState("");
-  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    productName: "",
+    productType: "",
+    requiredQuantity: "",
+    minPrice: "",
+    maxPrice: "",
+    productWeight: "",   // ✅ add this
+    address: "",
+  });
+  
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    if (savedUser) {
+      setFormData((prev) => ({
+        ...prev,
+        name: savedUser.name || "",
+        email: savedUser.email || "",
+        phone: savedUser.phone || "",
+      }));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:8000/api/forms/merchant", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          productName,
-          productType,
-          requiredQuantity,
-          minPrice,
-          maxPrice,
-          productWeight,
-          priceRange,
-          address,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
+      setLoading(false);
+
       if (response.ok) {
         alert("Form submitted successfully!");
+        navigate("/form");
       } else {
-        alert(data.message || "Something went wrong. Please try again.");
+        alert(data.message || "Error submitting form");
       }
     } catch (err) {
+      setLoading(false);
       alert("Something went wrong. Please try again later.");
     }
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container" style={{ backgroundColor: "#f8e8d3" }}>
       <h2>Merchant Form</h2>
       <form onSubmit={handleSubmit}>
+        <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required readOnly />
+        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required readOnly />
+        <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
+        
+        <input type="text" name="productName" placeholder="Product Name" value={formData.productName} onChange={handleChange} required />
+        <input type="text" name="productType" placeholder="Product Type" value={formData.productType} onChange={handleChange} required />
+        <input type="number" name="requiredQuantity" placeholder="Required Quantity" value={formData.requiredQuantity} onChange={handleChange} required />
+        <input type="number" name="minPrice" placeholder="Min Price" value={formData.minPrice} onChange={handleChange} required />
+        <input type="number" name="maxPrice" placeholder="Max Price" value={formData.maxPrice} onChange={handleChange} required />
         <input
-          type="text"
-          placeholder="Product Name"
-          value={productName}
-          required
-          onChange={(e) => setProductName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Product Type"
-          value={productType}
-          required
-          onChange={(e) => setProductType(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Required Quantity"
-          value={requiredQuantity}
-          required
-          onChange={(e) => setRequiredQuantity(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Min Price"
-          value={minPrice}
-          required
-          onChange={(e) => setMinPrice(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Max Price"
-          value={maxPrice}
-          required
-          onChange={(e) => setMaxPrice(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Product Weight"
-          value={productWeight}
-          required
-          onChange={(e) => setProductWeight(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Price Range"
-          value={priceRange}
-          required
-          onChange={(e) => setPriceRange(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Address"
-          value={address}
-          required
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <button type="submit">Submit</button>
+  type="text"
+  name="productWeight"
+  placeholder="Product Weight"
+  value={formData.productWeight}
+  onChange={handleChange}
+  required
+/>
+
+        <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
+        
+        <button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </div>
   );

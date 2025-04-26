@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const formController = require('../controllers/formController');
 
-router.post('/farmer', formController.submitFarmerForm);
-router.post('/merchant', formController.submitMerchantForm);
-router.post('/company', formController.submitCompanyForm);
+const { 
+  submitFarmerForm, 
+  submitMerchantForm, 
+  submitCompanyForm 
+} = require('../controllers/formController');
+
+// Routes for handling form submissions
+router.post('/farmer', submitFarmerForm);
+router.post('/merchant', submitMerchantForm);
+router.post('/company', submitCompanyForm);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // Signup
 const signup = async (req, res) => {
-  const { name, email, password, category } = req.body;
+  const { name, email, password, category, phone } = req.body;  // Added phone
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: 'User already exists' });
@@ -15,6 +15,7 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       category,
+      phone,  // Save phone number during signup
     });
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -39,7 +40,6 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h', issuer: 'krushak', subject: user._id.toString() }
     );
-    
 
     res.status(200).json({
       message: 'Login successful',
@@ -47,6 +47,8 @@ const login = async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
+        email: user.email,  // Send email
+        phone: user.phone,  // Send phone number
         category: user.category,
       },
     });

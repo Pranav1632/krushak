@@ -20,7 +20,12 @@ const SignupPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    const isValidPhone = /^\d{10}$/.test(formData.phone);  // For a 10-digit phone number
+    if (!isValidPhone) {
+      alert("Please enter a valid 10-digit phone number");
+      return;
+    }
+    
     try {
       const response = await fetch("http://localhost:8000/api/auth/signup", {
         method: "POST",
