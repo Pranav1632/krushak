@@ -49,6 +49,7 @@ const FarmerForm = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(formData),
+        
       });
 
       const data = await response.json();
@@ -56,7 +57,7 @@ const FarmerForm = () => {
 
       if (response.ok) {
         alert("Form submitted successfully!");
-        navigate("/form");
+        navigate("/farmer-success");
       } else {
         alert(data.message || "Error submitting form");
       }
@@ -70,16 +71,16 @@ const FarmerForm = () => {
     <div className="form-container" style={{ backgroundColor: "#d3f8d3" }}>
       <h2>Farmer Form</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required readOnly />
+        <input type="text" name="name" placeholder="Name(as per adhar)" value={formData.name} onChange={handleChange} required readOnly />
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required readOnly />
         <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
         
         <input type="text" name="cropName" placeholder="Crop Name" value={formData.cropName} onChange={handleChange} required />
         <input type="text" name="cropType" placeholder="Crop Type" value={formData.cropType} onChange={handleChange} required />
-        <input type="number" name="quantity" placeholder="Quantity" value={formData.quantity} onChange={handleChange} required />
-        <input type="number" name="productionArea" placeholder="Production Area" value={formData.productionArea} onChange={handleChange} required />
-        <input type="number" name="minPrice" placeholder="Min Price" value={formData.minPrice} onChange={handleChange} required />
-        <input type="number" name="maxPrice" placeholder="Max Price" value={formData.maxPrice} onChange={handleChange} required />
+        <input type="number" name="quantity" placeholder="Quantity(quintal)" value={formData.quantity} onChange={handleChange} required />
+        <input type="number" name="productionArea" placeholder="Production Area(acres)" value={formData.productionArea} onChange={handleChange} required />
+        <input type="number" name="minPrice" placeholder="Min Expected Price" value={formData.minPrice} onChange={handleChange} required />
+        <input type="number" name="maxPrice" placeholder="Max Expected Price" value={formData.maxPrice} onChange={handleChange} required />
         <input type="text" name="deliveryMethod" placeholder="Delivery Method" value={formData.deliveryMethod} onChange={handleChange} required />
         <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
         
