@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
       // Make the fetch request
       const response = await fetch("http://localhost:8000/api/auth/login", {
@@ -18,16 +18,17 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       // Wait for the response and parse it
       const data = await response.json();
-  
+
       // Check if the response is successful
       if (response.ok) {
+        alert("Login Successful!"); // ✅ Added this line
         // Store the token and user info
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-  
+
         // Redirect based on user category
         if (data.user.category === "Farmer") {
           navigate("/farmer-form");
@@ -44,7 +45,6 @@ const LoginPage = () => {
       alert("Something went wrong. Please try again later.");
     }
   };
-  
 
   return (
     <div className="login-container">
