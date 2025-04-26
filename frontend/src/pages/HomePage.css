@@ -1,0 +1,54 @@
+.home-container {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #333;
+  }
+  
+  .home-header {
+    background: #64b000;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .navbar a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar .login-link {
+    font-weight: bold;
+  }
+  
+  .home-main {
+    background: #8dd438;
+    text-align: center;
+    padding: 30px 20px;
+    color: white;
+  }
+  
+  .stats {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    background: white;
+    color: #64b000;
+    border-radius: 10px;
+    padding: 15px;
+    width: 140px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    font-weight: bold;
+  }
+  
