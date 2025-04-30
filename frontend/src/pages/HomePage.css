@@ -51,4 +51,19 @@
     box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
     font-weight: bold;
   }
-  
+  /* Example CSS for the Status Page Button */
+.status-btn {
+  padding: 10px 20px;
+  margin-left: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.status-btn:hover {
+  background-color: #45a049;
+}

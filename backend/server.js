@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
+const statusRoutes = require("./routes/statusRoutes");
 
 dotenv.config(); // Load environment variables
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 const formRoutes = require('./routes/formRoutes');
 app.use('/api/forms', formRoutes); // <- Add this!
+app.use("/api/status", statusRoutes);
 
 
 // Connect to MongoDB

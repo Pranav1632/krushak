@@ -9,6 +9,7 @@ import CompanyForm from "./pages/CompanyForm";
 import FarmerSuccess from "./pages/SuccessPages/FarmerSuccess";
 import MerchantSuccess from "./pages/SuccessPages/MerchantSuccess";
 import CompanySuccess from "./pages/SuccessPages/CompanySuccess";
+import StatusPage from "./pages/status/StatusPage"; // Corrected import path
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
       <Route path="/farmer-success" element={<FarmerSuccess />} />
       <Route path="/merchant-success" element={<MerchantSuccess />} />
       <Route path="/company-success" element={<CompanySuccess />} />
+
+      {/* ✅ Status Page Route */}
+      <Route path="/status" element={<StatusPage />} />
     </Routes>
   );
 }
 
 export default App;
-
