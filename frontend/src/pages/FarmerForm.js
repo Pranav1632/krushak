@@ -44,7 +44,7 @@ const FarmerForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://krushak-backend.onrender.com", {
+      const response = await fetch("https://krushak-backend.onrender.com/api/forms/farmer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
