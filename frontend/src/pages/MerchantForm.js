@@ -43,7 +43,7 @@ const MerchantForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/forms/merchant", {
+      const response = await fetch("https://krushak-backend.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
