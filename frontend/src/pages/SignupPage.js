@@ -28,7 +28,7 @@ const SignupPage = () => {
     }
 
     try {
-      const response = await fetch("https://krushak-backend.onrender.com/api/auth/signup", {
+      const response = await fetch("https://krushak-backend.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
