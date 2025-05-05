@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./FormPage.css";
 import "./MerchantForm.css";
 
@@ -16,10 +18,9 @@ const MerchantForm = () => {
     requiredQuantity: "",
     minPrice: "",
     maxPrice: "",
-    productWeight: "",   // ✅ add this
+    productWeight: "",
     address: "",
   });
-  
 
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
@@ -57,7 +58,6 @@ const MerchantForm = () => {
       if (response.ok) {
         alert("Form submitted successfully!");
         navigate("/merchant-success");
-
       } else {
         alert(data.message || "Error submitting form");
       }
@@ -68,34 +68,26 @@ const MerchantForm = () => {
   };
 
   return (
-    <div className="form-container" style={{ backgroundColor: "#f8e8d3" }}>
-      <h2>Merchant Form</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required readOnly />
-        <input type="email" name="email" placeholder="Email(valid)" value={formData.email} onChange={handleChange} required readOnly />
-        <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
-        
-        <input type="text" name="productName" placeholder="Required Product Name" value={formData.productName} onChange={handleChange} required />
-        <input type="text" name="productType" placeholder="Product Type" value={formData.productType} onChange={handleChange} required />
-        <input type="number" name="requiredQuantity" placeholder="Required Quantity(quintal)" value={formData.requiredQuantity} onChange={handleChange} required />
-        <input type="number" name="minPrice" placeholder="Min expected Price" value={formData.minPrice} onChange={handleChange} required />
-        <input type="number" name="maxPrice" placeholder="Max expected Price" value={formData.maxPrice} onChange={handleChange} required />
-        <input
-  type="text"
-  name="productWeight"
-  placeholder="Product Weight"
-  value={formData.productWeight}
-  onChange={handleChange}
-  required
-/>
-
-        <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
-        
-        <button type="submit" disabled={loading}>
-          {loading ? "Submitting..." : "Submit"}
-        </button>
-      </form>
-    </div>
+    <>
+      <Navbar />
+      <div className="form-container" style={{ backgroundColor: "#f8e8d3" }}>
+        <h2>Merchant Form</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required readOnly />
+          <input type="email" name="email" placeholder="Email(valid)" value={formData.email} onChange={handleChange} required readOnly />
+          <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
+          <input type="text" name="productName" placeholder="Required Product Name" value={formData.productName} onChange={handleChange} required />
+          <input type="text" name="productType" placeholder="Product Type" value={formData.productType} onChange={handleChange} required />
+          <input type="number" name="requiredQuantity" placeholder="Required Quantity(quintal)" value={formData.requiredQuantity} onChange={handleChange} required />
+          <input type="number" name="minPrice" placeholder="Min expected Price(per Quintal)" value={formData.minPrice} onChange={handleChange} required />
+          <input type="number" name="maxPrice" placeholder="Max expected Price(per Quintal)" value={formData.maxPrice} onChange={handleChange} required />
+          <input type="text" name="productWeight" placeholder="Transportation(By Own,By Farmer..etc)" value={formData.productWeight} onChange={handleChange} required />
+          <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
+          <button type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
 };
 

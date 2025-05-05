@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
+const formRoutes = require('./routes/formRoutes');
+const contactRoutes = require('./routes/contactRoutes'); // Add the contact route
 
 dotenv.config(); // Load environment variables
 
@@ -14,9 +16,8 @@ app.use(cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
-const formRoutes = require('./routes/formRoutes');
-app.use('/api/forms', formRoutes); // <- Add this!
-
+app.use('/api/forms', formRoutes);
+app.use('/api/contact', contactRoutes); // Add this route for contact form submissions
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

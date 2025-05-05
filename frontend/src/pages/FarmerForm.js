@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./FormPage.css";
 import "./FarmerForm.css";
 
@@ -49,7 +51,6 @@ const FarmerForm = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(formData),
-        
       });
 
       const data = await response.json();
@@ -68,27 +69,27 @@ const FarmerForm = () => {
   };
 
   return (
-    <div className="form-container" style={{ backgroundColor: "#d3f8d3" }}>
-      <h2>Farmer Form</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Name(as per adhar)" value={formData.name} onChange={handleChange} required readOnly />
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required readOnly />
-        <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
-        
-        <input type="text" name="cropName" placeholder="Crop Name" value={formData.cropName} onChange={handleChange} required />
-        <input type="text" name="cropType" placeholder="Crop Type" value={formData.cropType} onChange={handleChange} required />
-        <input type="number" name="quantity" placeholder="Quantity(quintal)" value={formData.quantity} onChange={handleChange} required />
-        <input type="number" name="productionArea" placeholder="Production Area(acres)" value={formData.productionArea} onChange={handleChange} required />
-        <input type="number" name="minPrice" placeholder="Min Expected Price" value={formData.minPrice} onChange={handleChange} required />
-        <input type="number" name="maxPrice" placeholder="Max Expected Price" value={formData.maxPrice} onChange={handleChange} required />
-        <input type="text" name="deliveryMethod" placeholder="Delivery Method" value={formData.deliveryMethod} onChange={handleChange} required />
-        <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
-        
-        <button type="submit" disabled={loading}>
-          {loading ? "Submitting..." : "Submit"}
-        </button>
-      </form>
-    </div>
+    <>
+      <Navbar />
+      <div className="form-container" style={{ backgroundColor: "#d3f8d3" }}>
+        <h2>Farmer Form</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Name(as per adhar)" value={formData.name} onChange={handleChange} required readOnly />
+          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required readOnly />
+          <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} required readOnly />
+          <input type="text" name="cropName" placeholder="Crop Name" value={formData.cropName} onChange={handleChange} required />
+          <input type="text" name="cropType" placeholder="Crop Type" value={formData.cropType} onChange={handleChange} required />
+          <input type="number" name="quantity" placeholder="Quantity(quintal)" value={formData.quantity} onChange={handleChange} required />
+          <input type="number" name="productionArea" placeholder="Production Area(acres)" value={formData.productionArea} onChange={handleChange} required />
+          <input type="number" name="minPrice" placeholder="Min Expected Price(per Quintal)" value={formData.minPrice} onChange={handleChange} required />
+          <input type="number" name="maxPrice" placeholder="Max Expected Price(per Quintal)" value={formData.maxPrice} onChange={handleChange} required />
+          <input type="text" name="deliveryMethod" placeholder="Transport Method(By Own,By Farmer..etc)" value={formData.deliveryMethod} onChange={handleChange} required />
+          <textarea name="address" placeholder="Address" value={formData.address} onChange={handleChange} required></textarea>
+          <button type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
 };
 
