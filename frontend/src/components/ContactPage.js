@@ -24,7 +24,7 @@ const ContactPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://krushak-backend.onrender.com', {
+      const response = await fetch('https://krushak-backend.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
