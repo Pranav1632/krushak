@@ -44,7 +44,7 @@ const CompanyForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://krushak-backend.onrender.com", {
+      const response = await fetch("https://krushak-backend.onrender.com/api/forms/company", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
